@@ -38,7 +38,7 @@ class CivibuildGeneralTest extends \Civi\Civibuild\CivibuildTestCase {
     $this->assertRegExp(";Execute [^\n]*/app/config/{$this->buildType}/download.sh;", $result->getOutput());
     $this->assertRegExp(";Execute [^\n]*/app/config/{$this->buildType}/install.sh;", $result->getOutput());
     $this->assertRegExp("; - CMS_ROOT: [^\n]*/{$this->buildName};", $result->getOutput());
-    $this->assertRegExp('; - CIVI_DB_DSN: mysql://.*:.*@.*/.*;', $result->getOutput());
+    $this->assertRegExp('; - CIVI_DB_DSN: mysqli://.*:.*@.*/.*;', $result->getOutput());
     $this->assertTrue(file_exists($this->getAbsPath($this->buildName)));
     $this->assertTrue(file_exists($this->getAbsPath($this->buildName . '.sh')));
 
@@ -48,7 +48,7 @@ class CivibuildGeneralTest extends \Civi\Civibuild\CivibuildTestCase {
     $this->assertNotRegExp(";Execute [^\n]*/app/config/{$this->buildType}/download.sh;", $result->getOutput());
     $this->assertNotRegExp(";Execute [^\n]*/app/config/{$this->buildType}/install.sh;", $result->getOutput());
     $this->assertRegExp("; - CMS_ROOT: [^\n]*/{$this->buildName};", $result->getOutput());
-    $this->assertRegExp('; - CIVI_DB_DSN: mysql://.*:.*@.*/.*;', $result->getOutput());
+    $this->assertRegExp('; - CIVI_DB_DSN: mysqli://.*:.*@.*/.*;', $result->getOutput());
     $this->assertTrue(file_exists($this->getAbsPath($this->buildName)));
     $this->assertTrue(file_exists($this->getAbsPath($this->buildName . '.sh')));
 
@@ -66,7 +66,7 @@ class CivibuildGeneralTest extends \Civi\Civibuild\CivibuildTestCase {
     $this->assertRegExp(";Execute [^\n]*/app/config/{$this->buildType}/download.sh;", $result->getOutput());
     $this->assertNotRegExp(";Execute [^\n]*/app/config/{$this->buildType}/install.sh;", $result->getOutput());
     $this->assertNotRegExp("; - CMS_ROOT: [^\n]*/{$this->buildName};", $result->getOutput());
-    $this->assertNotRegExp('; - CIVI_DB_DSN: mysql://.*:.*@.*/.*;', $result->getOutput());
+    $this->assertNotRegExp('; - CIVI_DB_DSN: mysqli://.*:.*@.*/.*;', $result->getOutput());
     $this->assertTrue(file_exists($this->getAbsPath($this->buildName)));
     $this->assertTrue(file_exists($this->getAbsPath($this->buildName . '.sh')));
 
@@ -76,7 +76,7 @@ class CivibuildGeneralTest extends \Civi\Civibuild\CivibuildTestCase {
     $this->assertNotRegExp(";Execute [^\n]*/app/config/{$this->buildType}/download.sh;", $result->getOutput());
     $this->assertRegExp(";Execute [^\n]*/app/config/{$this->buildType}/install.sh;", $result->getOutput());
     $this->assertRegExp("; - CMS_ROOT: [^\n]*/{$this->buildName};", $result->getOutput());
-    $this->assertRegExp('; - CIVI_DB_DSN: mysql://.*:.*@.*/.*;', $result->getOutput());
+    $this->assertRegExp('; - CIVI_DB_DSN: mysqli://.*:.*@.*/.*;', $result->getOutput());
     $this->assertTrue(file_exists($this->getAbsPath($this->buildName)));
     $this->assertTrue(file_exists($this->getAbsPath($this->buildName . '.sh')));
 
@@ -86,7 +86,7 @@ class CivibuildGeneralTest extends \Civi\Civibuild\CivibuildTestCase {
     $this->assertNotRegExp(";Execute [^\n]*/app/config/{$this->buildType}/download.sh;", $result->getOutput());
     $this->assertRegExp(";Execute [^\n]*/app/config/{$this->buildType}/install.sh;", $result->getOutput());
     $this->assertRegExp("; - CMS_ROOT: [^\n]*/{$this->buildName};", $result->getOutput());
-    $this->assertRegExp('; - CIVI_DB_DSN: mysql://.*:.*@.*/.*;', $result->getOutput());
+    $this->assertRegExp('; - CIVI_DB_DSN: mysqli://.*:.*@.*/.*;', $result->getOutput());
     $this->assertTrue(file_exists($this->getAbsPath($this->buildName)));
     $this->assertTrue(file_exists($this->getAbsPath($this->buildName . '.sh')));
 
@@ -137,7 +137,7 @@ class CivibuildGeneralTest extends \Civi\Civibuild\CivibuildTestCase {
       "civibuild create {$this->buildName} --type $this->buildType"
     ));
     $this->assertRegExp("; - CMS_ROOT: [^\n]*/{$this->buildName};", $result->getOutput());
-    $this->assertRegExp('; - CIVI_DB_DSN: mysql://.*:.*@.*/.*;', $result->getOutput());
+    $this->assertRegExp('; - CIVI_DB_DSN: mysqli://.*:.*@.*/.*;', $result->getOutput());
     $this->assertTrue(file_exists($this->getAbsPath($this->buildName)));
     $this->assertTrue(file_exists($this->getAbsPath($this->buildName . '.sh')));
 

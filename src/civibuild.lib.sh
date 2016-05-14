@@ -577,11 +577,11 @@ function civicrm_make_test_settings_php() {
   if (!defined('CIVICRM_DSN')) {
     if (defined('CIVICRM_WEBTEST')) {
       // For Selenium tests, use normal DB
-      define('CIVICRM_DSN', "mysql://${CIVI_DB_USER}:${CIVI_DB_PASS}@${CIVI_DB_HOST}:${CIVI_DB_PORT}/${CIVI_DB_NAME}");
-      define('CIVICRM_UF_DSN', "mysql://${CMS_DB_USER}:${CMS_DB_PASS}@${CMS_DB_HOST}:${CMS_DB_PORT}/${CMS_DB_NAME}");
+      define('CIVICRM_DSN', "mysqli://${CIVI_DB_USER}:${CIVI_DB_PASS}@${CIVI_DB_HOST}:${CIVI_DB_PORT}/${CIVI_DB_NAME}");
+      define('CIVICRM_UF_DSN', "mysqli://${CMS_DB_USER}:${CMS_DB_PASS}@${CMS_DB_HOST}:${CMS_DB_PORT}/${CMS_DB_NAME}");
     } else {
       // For unit tests, use headless test DB
-      define('CIVICRM_DSN', "mysql://${TEST_DB_USER}:${TEST_DB_PASS}@${TEST_DB_HOST}:${TEST_DB_PORT}/${TEST_DB_NAME}");
+      define('CIVICRM_DSN', "mysqli://${TEST_DB_USER}:${TEST_DB_PASS}@${TEST_DB_HOST}:${TEST_DB_PORT}/${TEST_DB_NAME}");
     }
   }
   if (!defined('CIVICRM_TEMPLATE_COMPILEDIR')) {
@@ -702,7 +702,7 @@ function backdrop_install() {
 
     CMS_DB_HOSTPORT=$(cvutil_build_hostport "$CMS_DB_HOST" "$CMS_DB_PORT")
     ./core/scripts/install.sh "$@" \
-      --db-url="mysql://${CMS_DB_USER}:${CMS_DB_PASS}@${CMS_DB_HOSTPORT}/${CMS_DB_NAME}" \
+      --db-url="mysqli://${CMS_DB_USER}:${CMS_DB_PASS}@${CMS_DB_HOSTPORT}/${CMS_DB_NAME}" \
       --account-name="$ADMIN_USER" \
       --account-pass="$ADMIN_PASS" \
       --account-mail="$ADMIN_EMAIL" \
@@ -752,7 +752,7 @@ function drupal7_install() {
     [ -f "sites/$DRUPAL_SITE_DIR/settings.php" ] && rm -f "sites/$DRUPAL_SITE_DIR/settings.php"
 
     drush site-install -y "$@" \
-      --db-url="mysql://${CMS_DB_USER}:${CMS_DB_PASS}@${CMS_DB_HOSTPORT}/${CMS_DB_NAME}" \
+      --db-url="mysqli://${CMS_DB_USER}:${CMS_DB_PASS}@${CMS_DB_HOSTPORT}/${CMS_DB_NAME}" \
       --account-name="$ADMIN_USER" \
       --account-pass="$ADMIN_PASS" \
       --account-mail="$ADMIN_EMAIL" \
@@ -783,7 +783,7 @@ function drupal8_install() {
     [ -f "sites/$DRUPAL_SITE_DIR/settings.php" ] && rm -f "sites/$DRUPAL_SITE_DIR/settings.php"
 
     drush8 site-install -y "$@" \
-      --db-url="mysql://${CMS_DB_USER}:${CMS_DB_PASS}@${CMS_DB_HOSTPORT}/${CMS_DB_NAME}" \
+      --db-url="mysqli://${CMS_DB_USER}:${CMS_DB_PASS}@${CMS_DB_HOSTPORT}/${CMS_DB_NAME}" \
       --account-name="$ADMIN_USER" \
       --account-pass="$ADMIN_PASS" \
       --account-mail="$ADMIN_EMAIL" \

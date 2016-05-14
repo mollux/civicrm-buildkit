@@ -27,7 +27,7 @@ class CivibuildCreateTest extends \Civi\Civibuild\CivibuildTestCase {
     $this->assertFalse(file_exists($this->getAbsPath('civibuild-test', 'wp-content/plugins/civicrm/civicrm/packages/FIRST-DUMMY.txt')), 'Expect pristine packages');
     $this->assertFalse(file_exists($this->getAbsPath('civibuild-test', 'wp-content/plugins/civicrm/civicrm/packages/SECOND-DUMMY.txt')), 'Expect pristine packages');
     $this->assertRegExp('; - CMS_ROOT: [^\n]+/build/civibuild-test;', $result->getOutput());
-    $this->assertRegExp('; - CIVI_DB_DSN: mysql://.*:.*@.*/.*;', $result->getOutput());
+    $this->assertRegExp('; - CIVI_DB_DSN: mysqli://.*:.*@.*/.*;', $result->getOutput());
 
     $configFile = $this->getPrjDir() . '/build/civibuild-test.sh';
     $this->assertFileExists($configFile);
@@ -53,7 +53,7 @@ class CivibuildCreateTest extends \Civi\Civibuild\CivibuildTestCase {
     $this->assertTrue(file_exists($this->getAbsPath('civibuild-test', 'wp-content/plugins/civicrm/civicrm/packages/FIRST-DUMMY.txt')), 'Expect patched packages');
     $this->assertTrue(file_exists($this->getAbsPath('civibuild-test', 'wp-content/plugins/civicrm/civicrm/packages/SECOND-DUMMY.txt')), 'Expect patched packages');
     $this->assertRegExp('; - CMS_ROOT: .*/build/civibuild-test;', $result->getOutput());
-    $this->assertRegExp('; - CIVI_DB_DSN: mysql://.*:.*@.*/.*;', $result->getOutput());
+    $this->assertRegExp('; - CIVI_DB_DSN: mysqli://.*:.*@.*/.*;', $result->getOutput());
   }
 
   public function testWpDemoWithConflictedPatch() {
@@ -80,5 +80,25 @@ class CivibuildCreateTest extends \Civi\Civibuild\CivibuildTestCase {
       $this->assertNotRegExp('; - CMS_ROOT: .*/build/civibuild-test;', $result->getOutput());
     }
   }
+
+  public function testDrupalDemoPHP7() {
+    $result = ProcessUtil::runOk($this->cmd(
+      'civibuild create civibuild-test --force --type drupal-demo --civi-ver php7' .
+      ' --url http://civibuild-test.localhost'
+    ));
+
+    $this->assertTrue(is_dir($this->getAbsPath('civibuild-test', 'sites/all/modules/civicrm/packages')), 'Expect to find packages dir');
+    $this->assertFalse(file_exists($this->getAbsPath('civibuild-test', 'sites/all/modules/civicrm/DUMMY-PATCH-DATA.txt')), 'Expect pristine core');
+    $this->assertFalse(file_exists($this->getAbsPath('civibuild-test', 'sites/all/modules/civicrm/packages/FIRST-DUMMY.txt')), 'Expect pristine packages');
+    $this->assertFalse(file_exists($this->getAbsPath('civibuild-test', 'sites/all/modules/civicrm/packages/SECOND-DUMMY.txt')), 'Expect pristine packages');
+    $this->assertRegExp('; - CMS_ROOT: [^\n]+/build/civibuild-test;', $result->getOutput());
+    $this->assertRegExp('; - CIVI_DB_DSN: mysqli://.*:.*@.*/.*;', $result->getOutput());
+
+    $configFile = $this->getPrjDir() . '/build/civibuild-test.sh';
+    $this->assertFileExists($configFile);
+    $config = file_get_contents($configFile);
+    $this->assertRegExp(';CMS_ROOT=[^\n]+/build/civibuild-test;', $config);
+  }
+
 
 }

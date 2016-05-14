@@ -16,16 +16,19 @@
   },
   "require": {
     "php": ">=5.3.3",
-    "drush/drush": "dev-master#d1d13676f5beacaa9f8619088fe3ae45ea28a6cf",
+    "drush/drush": "8.0.*",
     "totten/php-symbol-diff": "dev-master#54f869ca68a3cd75f3386f8490870369733d2c23",
     "civicrm/upgrade-test": "dev-master#590e971ccf70ae7caf1a3c11fc23535e4cd6c1f8",
     "drupal/coder": "dev-8.x-2.x-civi#a801890a82d52e23a83c5d820270b6e228843d79",
     "brianium/paratest": "dev-batching as 0.7",
-    "phpunit/phpunit": "3.7.27",
-    "phpunit/dbunit": "1.3.x",
+    "phpunit/phpunit": "~4.8",
+    "phpunit/dbunit": "1.3.2",
     "phpunit/phpunit-selenium": "1.2.x",
     "joomlatools/joomla-console": "dev-master-buildkit as 1.1.0",
     "squizlabs/PHP_CodeSniffer": ">=2"
+  },
+  "require-dev": {
+    "symfony/filesystem"
   },
   "repositories": [
     {
